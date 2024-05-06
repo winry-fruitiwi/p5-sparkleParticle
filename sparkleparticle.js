@@ -26,10 +26,21 @@ class SparkleParticle extends Particle {
         stroke(0, 0, 100, this.lifetime)
 
         vertex(0, this.s)
-        vertex(this.s, 0)
-        vertex(0, -this.s)
-        vertex(-this.s, 0)
-        vertex(0, this.s)
+
+        // control point base position
+        let ctrl = sqrt(this.s)
+
+        bezierVertex(ctrl, ctrl, /* c1 */ ctrl, ctrl, /* c2 */ this.s, 0 /* anchor */)
+        bezierVertex(ctrl, -ctrl, ctrl, -ctrl, 0, -this.s)
+        bezierVertex(-ctrl, -ctrl, -ctrl, -ctrl, -this.s, 0)
+        bezierVertex(-ctrl, ctrl, -ctrl, ctrl, 0, this.s)
+
+        // vertex(0, this.s)
+        //
+        // vertex(this.s, 0)
+        // vertex(0, -this.s)
+        // vertex(-this.s, 0)
+        // vertex(0, this.s)
 
         endShape()
         pop()
